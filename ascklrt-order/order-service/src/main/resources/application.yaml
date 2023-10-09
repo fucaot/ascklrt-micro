@@ -1,0 +1,20 @@
+server:
+  port: 18081
+
+dubbo:
+  application:
+    name: order-provider
+  protocol:
+    name: tri                                 # 使用triple协议
+    port: -1
+  registry:
+    address: nacos://127.0.0.1:8848
+    registerMode: instance                    # 注册模式，instance 只注册应用级地址、interface 只注册接口级地址、all(默认) 同时注册应用级和接口级地址；
+
+# spring:
+#   application:
+#     name: order-provider
+#   cloud:
+#     nacos:
+#       discovery:
+#         server-addr: 127.0.0.1:8848
