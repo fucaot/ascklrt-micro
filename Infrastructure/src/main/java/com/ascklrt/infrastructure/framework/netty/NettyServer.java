@@ -44,13 +44,14 @@ public class NettyServer {
                         new ChannelInitializer<NioSocketChannel>() {
                             @Override
                             protected void initChannel(NioSocketChannel ch) throws Exception {
-                                ch.pipeline().addLast(new StringDecoder());
-                                ch.pipeline().addLast(new SimpleChannelInboundHandler<String>() {
-                                    @Override
-                                    protected void channelRead0(ChannelHandlerContext channelHandlerContext, String msg) throws Exception {
-                                        System.out.println(msg);
-                                    }
-                                });
+                                ch.pipeline().addLast(new FirstServerHandler());
+                                // ch.pipeline().addLast(new StringDecoder());
+                                // ch.pipeline().addLast(new SimpleChannelInboundHandler<String>() {
+                                //     @Override
+                                //     protected void channelRead0(ChannelHandlerContext channelHandlerContext, String msg) throws Exception {
+                                //         System.out.println(msg);
+                                //     }
+                                // });
                             }
                         })
                 // .option(ChannelOption.SO_BACKLOG, 1024)                  // option()方法可以给服务端Channel设置一些TCP参数，最常见的就是so_backlog
