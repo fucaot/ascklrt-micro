@@ -1,4 +1,4 @@
-package com.ascklrt.infrastructure.framework.netty;
+package com.ascklrt.infrastructure.framework.netty.base;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufAllocator;
