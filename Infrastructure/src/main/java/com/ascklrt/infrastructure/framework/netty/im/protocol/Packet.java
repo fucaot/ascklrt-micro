@@ -1,5 +1,6 @@
 package com.ascklrt.infrastructure.framework.netty.im.protocol;
 
+import com.ascklrt.infrastructure.framework.netty.im.protocol.command.Command;
 import lombok.Data;
 
 @Data
@@ -13,5 +14,5 @@ public abstract class Packet {
     /**
      * 指令
      */
-    public abstract Byte getCommand();
+    public abstract Command getCommand();
 }

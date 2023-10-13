@@ -1,7 +1,9 @@
 package com.ascklrt.infrastructure.framework.netty.im.protocol;
 
+import com.ascklrt.infrastructure.framework.netty.im.protocol.command.Command;
 import com.ascklrt.infrastructure.framework.netty.im.protocol.command.LoginRequestPacket;
 import com.ascklrt.infrastructure.framework.netty.im.protocol.serializer.Serializer;
+import com.ascklrt.infrastructure.framework.netty.im.protocol.serializer.SerializerAlgorithm;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufAllocator;
 
@@ -31,7 +33,7 @@ public class PacketCodeC {
         buffer.writeInt(MAGIC_NUMBER);                                          // 第一部分魔数
         buffer.writeByte(packet.getVersion());                                  // 版本号
         buffer.writeByte(Serializer.DEFAULT.getSerializerAlgorithm());          // 序列化算法
-        buffer.writeByte(packet.getCommand());                                  // 指令
+        buffer.writeByte(packet.getCommand().getCode());                        // 指令
         buffer.writeInt(bytes.length);                                          // 数据长度
         buffer.writeBytes(bytes);                                               // 数据
         return buffer;
@@ -46,8 +48,9 @@ public class PacketCodeC {
         byte[] bytes = new byte[length];
         buffer.readBytes(bytes);
 
-        // Class<? extends Packet> clazz = getRequestType(command);
-
-       return Serializer.DEFAULT.deserialize(LoginRequestPacket.class, bytes);
+        // 识别指令
+        Class<? extends Packet> clz = Command.byCode(command).getClz();
+        // 解码
+        return SerializerAlgorithm.byCode(serializerAlgorithm).getSerializer().deserialize(clz, bytes);
     }
 }
