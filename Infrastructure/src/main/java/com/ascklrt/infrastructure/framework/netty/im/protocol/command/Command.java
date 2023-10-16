@@ -7,7 +7,9 @@ import java.util.Objects;
 
 public enum Command {
 
-    LOGIN_REQUEST((byte)1, LoginRequestPacket.class);
+    LOGIN_REQUEST((byte)1, LoginRequestPacket.class),
+    LOGIN_RESPONSE((byte)2, LoginRequestPacket.class),
+    ;
 
     private final byte code;
     private final Class<? extends Packet> clz;

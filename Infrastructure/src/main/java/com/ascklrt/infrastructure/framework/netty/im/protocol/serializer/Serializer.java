@@ -7,7 +7,7 @@ public interface Serializer {
     /**
      * 序列化算法
      */
-    byte getSerializerAlgorithm();
+    SerializerAlgorithm getSerializerAlgorithm();
 
     /**
      * Java对象转换为二进制数据

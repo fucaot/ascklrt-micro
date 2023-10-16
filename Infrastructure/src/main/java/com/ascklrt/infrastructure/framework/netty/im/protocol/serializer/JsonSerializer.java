@@ -2,10 +2,12 @@ package com.ascklrt.infrastructure.framework.netty.im.protocol.serializer;
 
 import cn.hutool.json.JSONUtil;
 
+import java.nio.charset.StandardCharsets;
+
 public class JsonSerializer implements Serializer{
 
     @Override
-    public byte getSerializerAlgorithm() {
+    public SerializerAlgorithm getSerializerAlgorithm() {
         return SerializerAlgorithm.JSON;
     }
 
@@ -16,6 +18,6 @@ public class JsonSerializer implements Serializer{
 
     @Override
     public <T> T deserialize(Class<T> clazz, byte[] bytes) {
-        return JSONUtil.toBean(bytes.toString(), clazz);
+        return JSONUtil.toBean(new String(bytes, StandardCharsets.UTF_8), clazz);
     }
 }

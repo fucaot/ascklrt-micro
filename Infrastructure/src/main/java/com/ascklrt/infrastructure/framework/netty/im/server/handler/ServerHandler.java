@@ -29,10 +29,9 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
                 loginResponsePacket.setSuccess(false);
             }
 
-            PacketCodeC.INSTANCE.encode(ctx.alloc().buffer(), loginResponsePacket);
+            ByteBuf encode = PacketCodeC.INSTANCE.encode(ctx.alloc().buffer(), loginResponsePacket);
+            ctx.channel().writeAndFlush(encode);
         }
-
-
     }
 
 

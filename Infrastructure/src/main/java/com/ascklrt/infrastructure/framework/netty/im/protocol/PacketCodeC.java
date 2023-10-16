@@ -30,12 +30,12 @@ public class PacketCodeC {
          */
         byte[] bytes = Serializer.DEFAULT.serializer(packet);
 
-        buffer.writeInt(MAGIC_NUMBER);                                          // 第一部分魔数
-        buffer.writeByte(packet.getVersion());                                  // 版本号
-        buffer.writeByte(Serializer.DEFAULT.getSerializerAlgorithm());          // 序列化算法
-        buffer.writeByte(packet.getCommand().getCode());                        // 指令
-        buffer.writeInt(bytes.length);                                          // 数据长度
-        buffer.writeBytes(bytes);                                               // 数据
+        buffer.writeInt(MAGIC_NUMBER);                                              // 第一部分魔数
+        buffer.writeByte(packet.getVersion());                                      // 版本号
+        buffer.writeByte(Serializer.DEFAULT.getSerializerAlgorithm().getCode());    // 序列化算法
+        buffer.writeByte(packet.getCommand().getCode());                            // 指令
+        buffer.writeInt(bytes.length);                                              // 数据长度
+        buffer.writeBytes(bytes);                                                   // 数据
         return buffer;
     }
 

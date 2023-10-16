@@ -1,6 +1,7 @@
 package com.ascklrt.infrastructure.framework.netty.im.protocol.command.response;
 
 import com.ascklrt.infrastructure.framework.netty.im.protocol.Packet;
+import com.ascklrt.infrastructure.framework.netty.im.protocol.command.Command;
 import lombok.Data;
 
 @Data
@@ -10,12 +11,16 @@ public class LoginResponsePacket extends Packet {
 
     private boolean success;
 
+    public boolean isSuccess() {
+        return success;
+    }
+
     public boolean getSuccess() {
         return success;
     }
 
     @Override
-    public Byte getCommand() {
-        return null;
+    public Command getCommand() {
+        return Command.LOGIN_REQUEST;
     }
 }
