@@ -1,7 +1,7 @@
 package com.ascklrt.infrastructure.framework.netty.im.client;
 
 import com.ascklrt.infrastructure.framework.netty.im.client.handler.ClientHandler;
-import com.ascklrt.infrastructure.framework.netty.im.protocol.PacketCodeC;
+import com.ascklrt.infrastructure.framework.netty.im.protocol.encode.PacketCodeC;
 import com.ascklrt.infrastructure.framework.netty.im.protocol.command.request.MessageRequestPacket;
 import com.ascklrt.infrastructure.framework.netty.im.util.LoginUtil;
 import io.netty.bootstrap.Bootstrap;

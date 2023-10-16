@@ -1,7 +1,7 @@
 package com.ascklrt.infrastructure.framework.netty.im.server.handler;
 
 import com.ascklrt.infrastructure.framework.netty.im.protocol.Packet;
-import com.ascklrt.infrastructure.framework.netty.im.protocol.PacketCodeC;
+import com.ascklrt.infrastructure.framework.netty.im.protocol.encode.PacketCodeC;
 import com.ascklrt.infrastructure.framework.netty.im.protocol.command.request.LoginRequestPacket;
 import com.ascklrt.infrastructure.framework.netty.im.protocol.command.request.MessageRequestPacket;
 import com.ascklrt.infrastructure.framework.netty.im.protocol.command.response.LoginResponsePacket;

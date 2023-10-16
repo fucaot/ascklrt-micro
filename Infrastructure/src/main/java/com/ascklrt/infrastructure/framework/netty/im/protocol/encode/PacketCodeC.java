@@ -1,5 +1,6 @@
-package com.ascklrt.infrastructure.framework.netty.im.protocol;
+package com.ascklrt.infrastructure.framework.netty.im.protocol.encode;
 
+import com.ascklrt.infrastructure.framework.netty.im.protocol.Packet;
 import com.ascklrt.infrastructure.framework.netty.im.protocol.command.Command;
 import com.ascklrt.infrastructure.framework.netty.im.protocol.serializer.Serializer;
 import com.ascklrt.infrastructure.framework.netty.im.protocol.serializer.SerializerAlgorithm;
