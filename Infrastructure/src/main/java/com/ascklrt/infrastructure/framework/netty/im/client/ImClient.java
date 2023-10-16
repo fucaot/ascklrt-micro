@@ -1,13 +1,19 @@
 package com.ascklrt.infrastructure.framework.netty.im.client;
 
 import com.ascklrt.infrastructure.framework.netty.im.client.handler.ClientHandler;
+import com.ascklrt.infrastructure.framework.netty.im.protocol.PacketCodeC;
+import com.ascklrt.infrastructure.framework.netty.im.protocol.command.request.MessageRequestPacket;
+import com.ascklrt.infrastructure.framework.netty.im.util.LoginUtil;
 import io.netty.bootstrap.Bootstrap;
+import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
+import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 
 import java.util.Date;
+import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class ImClient {
@@ -37,6 +43,10 @@ public class ImClient {
             // 连接成功
             if (future.isSuccess()) {
                 System.out.println("连接成功！");
+
+                // 连接成功，启动控制台线程
+                Channel channel = ((ChannelFuture) future).channel();
+                startConsoleThread(channel);
             } else if (retry == 0) {
                 System.out.println("次数已用完，放弃链接！");
             } else {
@@ -58,5 +68,24 @@ public class ImClient {
                         );
             }
         });
+
+    }
+
+
+    private static void startConsoleThread(Channel channel) {
+        new Thread(() -> {
+            while (!Thread.interrupted()) {
+                if (LoginUtil.hasLogin(channel)) {
+                    System.out.println("输入消息发送至服务端: ");
+                    Scanner sc = new Scanner(System.in);
+                    String line = sc.nextLine();
+
+                    MessageRequestPacket messageRequestPacket = new MessageRequestPacket();
+                    messageRequestPacket.setMessage(line);
+                    ByteBuf encode = PacketCodeC.INSTANCE.encode(channel.alloc().buffer(), messageRequestPacket);
+                    channel.writeAndFlush(encode);
+                }
+            }
+        }).start();
     }
 }

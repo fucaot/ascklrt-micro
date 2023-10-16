@@ -1,6 +1,7 @@
-package com.ascklrt.infrastructure.framework.netty.im.protocol.command;
+package com.ascklrt.infrastructure.framework.netty.im.protocol.command.request;
 
 import com.ascklrt.infrastructure.framework.netty.im.protocol.Packet;
+import com.ascklrt.infrastructure.framework.netty.im.protocol.command.Command;
 import lombok.Data;
 
 @Data

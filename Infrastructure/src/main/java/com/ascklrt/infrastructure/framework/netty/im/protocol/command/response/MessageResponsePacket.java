@@ -5,22 +5,12 @@ import com.ascklrt.infrastructure.framework.netty.im.protocol.command.Command;
 import lombok.Data;
 
 @Data
-public class LoginResponsePacket extends Packet {
+public class MessageResponsePacket extends Packet {
 
-    private String reason;
-
-    private boolean success;
-
-    public boolean isSuccess() {
-        return success;
-    }
-
-    public boolean getSuccess() {
-        return success;
-    }
+    private String message;
 
     @Override
     public Command getCommand() {
-        return Command.LOGIN_RESPONSE;
+        return Command.MESSAGE_RESPONSE;
     }
 }

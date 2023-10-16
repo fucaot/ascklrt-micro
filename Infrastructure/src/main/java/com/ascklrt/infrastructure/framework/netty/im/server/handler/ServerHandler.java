@@ -2,8 +2,10 @@ package com.ascklrt.infrastructure.framework.netty.im.server.handler;
 
 import com.ascklrt.infrastructure.framework.netty.im.protocol.Packet;
 import com.ascklrt.infrastructure.framework.netty.im.protocol.PacketCodeC;
-import com.ascklrt.infrastructure.framework.netty.im.protocol.command.LoginRequestPacket;
+import com.ascklrt.infrastructure.framework.netty.im.protocol.command.request.LoginRequestPacket;
+import com.ascklrt.infrastructure.framework.netty.im.protocol.command.request.MessageRequestPacket;
 import com.ascklrt.infrastructure.framework.netty.im.protocol.command.response.LoginResponsePacket;
+import com.ascklrt.infrastructure.framework.netty.im.protocol.command.response.MessageResponsePacket;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -17,6 +19,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
         // 解码
         Packet packet = PacketCodeC.INSTANCE.decode(buffer);
 
+        // 登陆流程
         if (packet instanceof LoginRequestPacket) {
             LoginRequestPacket loginRequestPacket = (LoginRequestPacket) packet;
             LoginResponsePacket loginResponsePacket = new LoginResponsePacket();
@@ -31,6 +34,18 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 
             ByteBuf encode = PacketCodeC.INSTANCE.encode(ctx.alloc().buffer(), loginResponsePacket);
             ctx.channel().writeAndFlush(encode);
+        }
+
+        // 发送消息流程
+        if (packet instanceof MessageRequestPacket) {
+            MessageRequestPacket messageRequestPacket = (MessageRequestPacket) packet;
+
+            System.out.println("收到客户端消息：" + messageRequestPacket.getMessage());
+
+            MessageResponsePacket messageResponsePacket = new MessageResponsePacket();
+            messageResponsePacket.setMessage("服务端回复：「" + messageRequestPacket.getMessage() + "」");
+            ByteBuf responseByteBuf = PacketCodeC.INSTANCE.encode(ctx.alloc().buffer(), messageResponsePacket);
+            ctx.channel().writeAndFlush(responseByteBuf);
         }
     }
 

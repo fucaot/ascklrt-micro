@@ -1,7 +1,6 @@
 package com.ascklrt.infrastructure.framework.netty.im.protocol;
 
 import com.ascklrt.infrastructure.framework.netty.im.protocol.command.Command;
-import com.ascklrt.infrastructure.framework.netty.im.protocol.command.LoginRequestPacket;
 import com.ascklrt.infrastructure.framework.netty.im.protocol.serializer.Serializer;
 import com.ascklrt.infrastructure.framework.netty.im.protocol.serializer.SerializerAlgorithm;
 import io.netty.buffer.ByteBuf;

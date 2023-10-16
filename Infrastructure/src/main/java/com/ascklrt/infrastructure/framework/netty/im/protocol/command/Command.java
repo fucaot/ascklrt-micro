@@ -1,14 +1,19 @@
 package com.ascklrt.infrastructure.framework.netty.im.protocol.command;
 
 import com.ascklrt.infrastructure.framework.netty.im.protocol.Packet;
+import com.ascklrt.infrastructure.framework.netty.im.protocol.command.request.LoginRequestPacket;
+import com.ascklrt.infrastructure.framework.netty.im.protocol.command.request.MessageRequestPacket;
+import com.ascklrt.infrastructure.framework.netty.im.protocol.command.response.LoginResponsePacket;
+import com.ascklrt.infrastructure.framework.netty.im.protocol.command.response.MessageResponsePacket;
 
 import java.util.Arrays;
 import java.util.Objects;
 
 public enum Command {
-
     LOGIN_REQUEST((byte)1, LoginRequestPacket.class),
-    LOGIN_RESPONSE((byte)2, LoginRequestPacket.class),
+    LOGIN_RESPONSE((byte)2, LoginResponsePacket.class),
+    MESSAGE_REQUEST((byte)3, MessageRequestPacket.class),
+    MESSAGE_RESPONSE((byte)4, MessageResponsePacket.class),
     ;
 
     private final byte code;
