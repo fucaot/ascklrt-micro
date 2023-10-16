@@ -10,12 +10,10 @@ import io.netty.channel.SimpleChannelInboundHandler;
 public class MessageRequestHandler extends SimpleChannelInboundHandler<MessageRequestPacket> {
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, MessageRequestPacket packet) throws Exception {
-        MessageRequestPacket messageRequestPacket = (MessageRequestPacket) packet;
-
-        System.out.println("收到客户端消息：" + messageRequestPacket.getMessage());
+        System.out.println("收到客户端消息：" + packet.getMessage());
 
         MessageResponsePacket messageResponsePacket = new MessageResponsePacket();
-        messageResponsePacket.setMessage("服务端回复：「" + messageRequestPacket.getMessage() + "」");
+        messageResponsePacket.setMessage("服务端回复：「" + packet.getMessage() + "」");
         ByteBuf responseByteBuf = PacketCodeC.INSTANCE.encode(ctx.alloc().buffer(), messageResponsePacket);
         ctx.channel().writeAndFlush(responseByteBuf);
     }

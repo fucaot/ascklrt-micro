@@ -18,9 +18,8 @@ import io.netty.channel.SimpleChannelInboundHandler;
 public class LoginRequestHandler extends SimpleChannelInboundHandler<LoginRequestPacket> {
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, LoginRequestPacket packet) throws Exception {
-        LoginRequestPacket loginRequestPacket = (LoginRequestPacket) packet;
         LoginResponsePacket loginResponsePacket = new LoginResponsePacket();
-        if (valid(loginRequestPacket)) {
+        if (valid(packet)) {
             System.out.println("IM-登陆成功！");
             loginResponsePacket.setSuccess(true);
         } else {
