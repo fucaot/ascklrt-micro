@@ -33,27 +33,27 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
     }
 
 
-    @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        ByteBuf buffer = (ByteBuf) msg;
-
-        Packet packet = PacketCodeC.INSTANCE.decode(buffer);
-        // 登陆回复
-        if (packet instanceof LoginResponsePacket) {
-            LoginResponsePacket loginResponsePacket = (LoginResponsePacket) packet;
-
-            if (loginResponsePacket.isSuccess()) {
-                LoginUtil.markAsLogin(ctx.channel());
-                System.out.println(new Date() + "客户端登陆成功");
-            } else {
-                System.out.println(new Date() + "客户端登陆失败，原因：" + loginResponsePacket.getReason());
-            }
-        }
-
-        // 消息回复
-        if (packet instanceof MessageResponsePacket) {
-            MessageResponsePacket messageResponsePacket = (MessageResponsePacket) packet;
-            System.out.println("服务端回复的消息：" + messageResponsePacket.getMessage());
-        }
-    }
+//    @Override
+//    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+//        ByteBuf buffer = (ByteBuf) msg;
+//
+//        Packet packet = PacketCodeC.INSTANCE.decode(buffer);
+//        // 登陆回复
+//        if (packet instanceof LoginResponsePacket) {
+//            LoginResponsePacket loginResponsePacket = (LoginResponsePacket) packet;
+//
+//            if (loginResponsePacket.isSuccess()) {
+//                LoginUtil.markAsLogin(ctx.channel());
+//                System.out.println(new Date() + "客户端登陆成功");
+//            } else {
+//                System.out.println(new Date() + "客户端登陆失败，原因：" + loginResponsePacket.getReason());
+//            }
+//        }
+//
+//        // 消息回复
+//        if (packet instanceof MessageResponsePacket) {
+//            MessageResponsePacket messageResponsePacket = (MessageResponsePacket) packet;
+//            System.out.println("服务端回复的消息：" + messageResponsePacket.getMessage());
+//        }
+//    }
 }

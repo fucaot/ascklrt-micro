@@ -14,7 +14,8 @@ public class MessageRequestHandler extends SimpleChannelInboundHandler<MessageRe
 
         MessageResponsePacket messageResponsePacket = new MessageResponsePacket();
         messageResponsePacket.setMessage("服务端回复：「" + packet.getMessage() + "」");
-        ByteBuf responseByteBuf = PacketCodeC.INSTANCE.encode(ctx.alloc().buffer(), messageResponsePacket);
-        ctx.channel().writeAndFlush(responseByteBuf);
+        ctx.channel().writeAndFlush(messageResponsePacket);
+
+        // ByteBuf responseByteBuf = PacketCodeC.INSTANCE.encode(ctx.alloc().buffer(), messageResponsePacket);
     }
 }

@@ -1,4 +1,4 @@
-package com.ascklrt.infrastructure.framework.netty.im.server.handler;
+package com.ascklrt.infrastructure.framework.netty.im.protocol.encode;
 
 import com.ascklrt.infrastructure.framework.netty.im.protocol.encode.PacketCodeC;
 import io.netty.buffer.ByteBuf;

@@ -28,8 +28,9 @@ public class LoginRequestHandler extends SimpleChannelInboundHandler<LoginReques
             loginResponsePacket.setSuccess(false);
         }
 
-        ByteBuf encode = PacketCodeC.INSTANCE.encode(ctx.alloc().buffer(), loginResponsePacket);
-        ctx.channel().writeAndFlush(encode);
+        // 直接写入Java对象，在pipline中加入PacketEncode，会到PacketEncode进行写入ByteBuf处理
+        ctx.channel().writeAndFlush(loginResponsePacket);
+        // ByteBuf encode = PacketCodeC.INSTANCE.encode(ctx.alloc().buffer(), loginResponsePacket);
     }
     private boolean valid(LoginRequestPacket loginRequestPacket) {
         return true;

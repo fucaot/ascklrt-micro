@@ -1,14 +1,11 @@
 package com.ascklrt.infrastructure.framework.netty.im.server;
 
+import com.ascklrt.infrastructure.framework.netty.im.protocol.encode.PacketEncode;
 import com.ascklrt.infrastructure.framework.netty.im.server.handler.LoginRequestHandler;
 import com.ascklrt.infrastructure.framework.netty.im.server.handler.MessageRequestHandler;
-import com.ascklrt.infrastructure.framework.netty.im.server.handler.PacketDecoder;
-import com.ascklrt.infrastructure.framework.netty.im.server.handler.ServerHandler;
+import com.ascklrt.infrastructure.framework.netty.im.protocol.encode.PacketDecoder;
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelOutboundHandlerAdapter;
-import io.netty.channel.ChannelPromise;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
@@ -40,8 +37,9 @@ public class ImServer {
                                 ch.pipeline()
                                         // .addLast(new ServerHandler())
                                         .addLast(new PacketDecoder())           // 解码
-                                        .addLast(new LoginRequestHandler())     // 登陆流程
-                                        .addLast(new MessageRequestHandler())   // 发送消息流程
+                                        .addLast(new LoginRequestHandler())     // 登陆流程     InboundHandler
+                                        .addLast(new MessageRequestHandler())   // 发送消息流程  InboundHandler
+                                        .addLast(new PacketEncode())            // 编码
                                 ;
                             }
                         })
