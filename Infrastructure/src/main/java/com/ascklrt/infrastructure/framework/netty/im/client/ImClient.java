@@ -3,6 +3,7 @@ package com.ascklrt.infrastructure.framework.netty.im.client;
 import com.ascklrt.infrastructure.framework.netty.im.client.handler.ClientHandler;
 import com.ascklrt.infrastructure.framework.netty.im.client.handler.LoginResponseHandler;
 import com.ascklrt.infrastructure.framework.netty.im.client.handler.MessageResponseHandler;
+import com.ascklrt.infrastructure.framework.netty.im.client.handler.Spliter;
 import com.ascklrt.infrastructure.framework.netty.im.protocol.command.response.LoginResponsePacket;
 import com.ascklrt.infrastructure.framework.netty.im.protocol.command.response.MessageResponsePacket;
 import com.ascklrt.infrastructure.framework.netty.im.protocol.encode.PacketCodeC;
@@ -39,8 +40,9 @@ public class ImClient {
                     @Override
                     protected void initChannel(Channel ch) throws Exception {
                         ch.pipeline()
-                                .addLast(new LengthFieldBasedFrameDecoder(  // 自定义拆包器
-                                        Integer.MAX_VALUE, 7, 4))
+                                // .addLast(new LengthFieldBasedFrameDecoder(  // 自定义拆包器
+                                //         Integer.MAX_VALUE, 7, 4))
+                                .addLast(new Spliter())                     // 自定义拆包器并拒绝非本协议连接
                                 .addLast(new PacketDecoder())
                                 .addLast(new ClientHandler())
                                 .addLast(new LoginResponseHandler())

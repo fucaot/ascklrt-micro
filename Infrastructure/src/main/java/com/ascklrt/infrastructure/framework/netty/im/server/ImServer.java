@@ -1,5 +1,6 @@
 package com.ascklrt.infrastructure.framework.netty.im.server;
 
+import com.ascklrt.infrastructure.framework.netty.im.client.handler.Spliter;
 import com.ascklrt.infrastructure.framework.netty.im.protocol.encode.PacketEncode;
 import com.ascklrt.infrastructure.framework.netty.im.server.handler.LoginRequestHandler;
 import com.ascklrt.infrastructure.framework.netty.im.server.handler.MessageRequestHandler;
@@ -37,8 +38,9 @@ public class ImServer {
                             protected void initChannel(NioSocketChannel ch) throws Exception {
                                 ch.pipeline()
                                         // .addLast(new ServerHandler())
-                                        .addLast(new LengthFieldBasedFrameDecoder(  // 自定义拆包器
-                                                Integer.MAX_VALUE, 7, 4))
+                                        // .addLast(new LengthFieldBasedFrameDecoder(  // 自定义拆包器
+                                        //         Integer.MAX_VALUE, 7, 4))
+                                        .addLast(new Spliter())                     // 自定义拆包器并拒绝非本协议连接
                                         .addLast(new PacketDecoder())               // 解码
                                         .addLast(new LoginRequestHandler())         // 登陆流程     InboundHandler
                                         .addLast(new MessageRequestHandler())       // 发送消息流程  InboundHandler
