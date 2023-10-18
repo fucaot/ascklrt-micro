@@ -17,7 +17,9 @@ import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 
+import java.nio.charset.Charset;
 import java.util.Date;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -37,6 +39,8 @@ public class ImClient {
                     @Override
                     protected void initChannel(Channel ch) throws Exception {
                         ch.pipeline()
+                                .addLast(new LengthFieldBasedFrameDecoder(  // 自定义拆包器
+                                        Integer.MAX_VALUE, 7, 4))
                                 .addLast(new PacketDecoder())
                                 .addLast(new ClientHandler())
                                 .addLast(new LoginResponseHandler())
@@ -86,14 +90,21 @@ public class ImClient {
         new Thread(() -> {
             while (!Thread.interrupted()) {
                 if (LoginUtil.hasLogin(channel)) {
-                    System.out.println("输入消息发送至服务端: ");
-                    Scanner sc = new Scanner(System.in);
-                    String line = sc.nextLine();
+                    // System.out.println("输入消息发送至服务端: ");
+                    // Scanner sc = new Scanner(System.in);
+                    // String line = sc.nextLine();
 
-                    MessageRequestPacket messageRequestPacket = new MessageRequestPacket();
-                    messageRequestPacket.setMessage(line);
-                    ByteBuf encode = PacketCodeC.INSTANCE.encode(channel.alloc().buffer(), messageRequestPacket);
-                    channel.writeAndFlush(encode);
+                    // MessageRequestPacket messageRequestPacket = new MessageRequestPacket();
+                    // messageRequestPacket.setMessage(line);
+                    // ByteBuf encode = PacketCodeC.INSTANCE.encode(channel.alloc().buffer(), messageRequestPacket);
+                    // channel.writeAndFlush(encode);
+
+                    for (int i = 0; i < 10; i++) {
+                        MessageRequestPacket messageRequestPacket = new MessageRequestPacket();
+                        messageRequestPacket.setMessage("这是一条测试粘包消息，Line！！！");
+                        ByteBuf encode = PacketCodeC.INSTANCE.encode(channel.alloc().buffer(), messageRequestPacket);
+                        channel.writeAndFlush(encode);
+                    }
                 }
             }
         }).start();

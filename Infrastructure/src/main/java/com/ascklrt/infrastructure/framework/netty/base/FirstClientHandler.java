@@ -14,6 +14,13 @@ public class FirstClientHandler extends ChannelInboundHandlerAdapter {
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         System.out.println(new Date() + ": 客户端写入数据");
 
+        // // 测试粘包
+        // for (int i = 0; i < 1000; i++) {
+        //     ByteBuf byteBufNian = getByteBufNian(ctx);
+        //     // 2. 写数据
+        //     ctx.channel().writeAndFlush(byteBufNian);
+        // }
+
         // 1. 获取数据
         ByteBuf buffer = getByteBuf(ctx);
 
@@ -31,6 +38,12 @@ public class FirstClientHandler extends ChannelInboundHandlerAdapter {
         byte[] bytes = "hello netty".getBytes(StandardCharsets.UTF_8);
         buffer.writeBytes(bytes);
         return buffer;
+    }
+    private static ByteBuf getByteBufNian(ChannelHandlerContext ctx) {
+        byte[] bytes = "你好，这是一条关于粘包的网络测试消息！！".getBytes(Charset.forName("utf-8"));
+        ByteBuf buffer = ctx.alloc().buffer();
+        ByteBuf byteBuf = buffer.writeBytes(bytes);
+        return byteBuf;
     }
 
     @Override

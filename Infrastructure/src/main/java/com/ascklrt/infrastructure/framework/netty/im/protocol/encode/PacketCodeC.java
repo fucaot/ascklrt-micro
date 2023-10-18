@@ -9,7 +9,7 @@ import io.netty.buffer.ByteBufAllocator;
 
 public class PacketCodeC {
 
-    private static final int MAGIC_NUMBER = 0x12345678;
+    public static final int MAGIC_NUMBER = 0x12345678;
 
     public static final PacketCodeC INSTANCE = new PacketCodeC();
 
@@ -40,11 +40,11 @@ public class PacketCodeC {
     }
 
     public Packet decode(ByteBuf buffer) {
-        int magicNumber = buffer.readInt();
-        byte version = buffer.readByte();
-        byte serializerAlgorithm = buffer.readByte();
-        byte command  = buffer.readByte();
-        int length = buffer.readInt();
+        int magicNumber = buffer.readInt();                                         // 第一部分魔数
+        byte version = buffer.readByte();                                           // 版本号
+        byte serializerAlgorithm = buffer.readByte();                               // 序列化算法
+        byte command  = buffer.readByte();                                          // 指令
+        int length = buffer.readInt();                                              // 数据长度
         byte[] bytes = new byte[length];
         buffer.readBytes(bytes);
 
