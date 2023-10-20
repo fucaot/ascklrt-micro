@@ -3,6 +3,7 @@ package com.ascklrt.infrastructure.framework.netty.im.server.handler;
 import com.ascklrt.infrastructure.framework.netty.im.protocol.encode.PacketCodeC;
 import com.ascklrt.infrastructure.framework.netty.im.protocol.command.request.LoginRequestPacket;
 import com.ascklrt.infrastructure.framework.netty.im.protocol.command.response.LoginResponsePacket;
+import com.ascklrt.infrastructure.framework.netty.im.util.LoginUtil;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -21,6 +22,9 @@ public class LoginRequestHandler extends SimpleChannelInboundHandler<LoginReques
         LoginResponsePacket loginResponsePacket = new LoginResponsePacket();
         if (valid(packet)) {
             System.out.println("IM-登陆成功！");
+
+            // 标记为已登陆
+            LoginUtil.markAsLogin(ctx.channel());
             loginResponsePacket.setSuccess(true);
         } else {
             System.out.println("IM-登陆失败！");

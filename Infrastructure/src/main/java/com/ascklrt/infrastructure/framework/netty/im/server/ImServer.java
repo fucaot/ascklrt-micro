@@ -2,6 +2,8 @@ package com.ascklrt.infrastructure.framework.netty.im.server;
 
 import com.ascklrt.infrastructure.framework.netty.im.client.handler.Spliter;
 import com.ascklrt.infrastructure.framework.netty.im.protocol.encode.PacketEncode;
+import com.ascklrt.infrastructure.framework.netty.im.server.handler.AuthHandler;
+import com.ascklrt.infrastructure.framework.netty.im.server.handler.LifeCyCleTestHandler;
 import com.ascklrt.infrastructure.framework.netty.im.server.handler.LoginRequestHandler;
 import com.ascklrt.infrastructure.framework.netty.im.server.handler.MessageRequestHandler;
 import com.ascklrt.infrastructure.framework.netty.im.protocol.encode.PacketDecoder;
@@ -40,9 +42,11 @@ public class ImServer {
                                         // .addLast(new ServerHandler())
                                         // .addLast(new LengthFieldBasedFrameDecoder(  // 自定义拆包器
                                         //         Integer.MAX_VALUE, 7, 4))
+                                        .addLast(new LifeCyCleTestHandler())
                                         .addLast(new Spliter())                     // 自定义拆包器并拒绝非本协议连接
                                         .addLast(new PacketDecoder())               // 解码
                                         .addLast(new LoginRequestHandler())         // 登陆流程     InboundHandler
+                                        .addLast(new AuthHandler())                 // 校验是否登陆
                                         .addLast(new MessageRequestHandler())       // 发送消息流程  InboundHandler
                                         .addLast(new PacketEncode())                // 编码
                                 ;
