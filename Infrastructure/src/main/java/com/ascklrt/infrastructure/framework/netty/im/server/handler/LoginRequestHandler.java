@@ -3,6 +3,8 @@ package com.ascklrt.infrastructure.framework.netty.im.server.handler;
 import com.ascklrt.infrastructure.framework.netty.im.protocol.encode.PacketCodeC;
 import com.ascklrt.infrastructure.framework.netty.im.protocol.command.request.LoginRequestPacket;
 import com.ascklrt.infrastructure.framework.netty.im.protocol.command.response.LoginResponsePacket;
+import com.ascklrt.infrastructure.framework.netty.im.server.user.Session;
+import com.ascklrt.infrastructure.framework.netty.im.server.user.SessionUtil;
 import com.ascklrt.infrastructure.framework.netty.im.util.LoginUtil;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -17,6 +19,9 @@ import io.netty.channel.SimpleChannelInboundHandler;
  * SimpleChannelInboundHandler来实现，我们只需要专注于我们要处理的业务逻辑即可。
  */
 public class LoginRequestHandler extends SimpleChannelInboundHandler<LoginRequestPacket> {
+
+    private int randomId = 0;
+
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, LoginRequestPacket packet) throws Exception {
         LoginResponsePacket loginResponsePacket = new LoginResponsePacket();
@@ -25,7 +30,12 @@ public class LoginRequestHandler extends SimpleChannelInboundHandler<LoginReques
 
             // 标记为已登陆
             LoginUtil.markAsLogin(ctx.channel());
+
+            String userId = randomUserId();
+            loginResponsePacket.setUserId(userId);
             loginResponsePacket.setSuccess(true);
+
+            SessionUtil.bindSession(new Session(userId, packet.getUsername()), ctx.channel());
         } else {
             System.out.println("IM-登陆失败！");
             loginResponsePacket.setReason("登陆失败");
@@ -35,6 +45,10 @@ public class LoginRequestHandler extends SimpleChannelInboundHandler<LoginReques
         // 直接写入Java对象，在pipline中加入PacketEncode，会到PacketEncode进行写入ByteBuf处理
         ctx.channel().writeAndFlush(loginResponsePacket);
         // ByteBuf encode = PacketCodeC.INSTANCE.encode(ctx.alloc().buffer(), loginResponsePacket);
+    }
+    synchronized private String randomUserId() {
+        randomId = randomId + 1;
+        return String.valueOf(randomId);
     }
     private boolean valid(LoginRequestPacket loginRequestPacket) {
         return true;
