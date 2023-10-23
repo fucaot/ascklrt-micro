@@ -1,12 +1,10 @@
 package com.ascklrt.infrastructure.framework.netty.im.server.handler;
 
-import com.ascklrt.infrastructure.framework.netty.im.protocol.encode.PacketCodeC;
 import com.ascklrt.infrastructure.framework.netty.im.protocol.command.request.LoginRequestPacket;
 import com.ascklrt.infrastructure.framework.netty.im.protocol.command.response.LoginResponsePacket;
 import com.ascklrt.infrastructure.framework.netty.im.server.user.Session;
 import com.ascklrt.infrastructure.framework.netty.im.server.user.SessionUtil;
 import com.ascklrt.infrastructure.framework.netty.im.util.LoginUtil;
-import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 

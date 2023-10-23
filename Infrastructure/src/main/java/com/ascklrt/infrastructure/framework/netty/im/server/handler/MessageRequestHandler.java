@@ -5,9 +5,11 @@ import com.ascklrt.infrastructure.framework.netty.im.protocol.command.request.Me
 import com.ascklrt.infrastructure.framework.netty.im.protocol.command.response.MessageResponsePacket;
 import com.ascklrt.infrastructure.framework.netty.im.server.user.Session;
 import com.ascklrt.infrastructure.framework.netty.im.server.user.SessionUtil;
-import io.netty.buffer.ByteBuf;
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+
+import java.util.Objects;
 
 public class MessageRequestHandler extends SimpleChannelInboundHandler<MessageRequestPacket> {
     @Override
@@ -22,8 +24,15 @@ public class MessageRequestHandler extends SimpleChannelInboundHandler<MessageRe
         messageResponsePacket.setFromUserId(session.getUserId());
         messageResponsePacket.setFromUserName(session.getUserName());
         messageResponsePacket.setMessage("服务端回复：「" + packet.getMessage() + "」");
-        ctx.channel().writeAndFlush(messageResponsePacket);
 
+
+        Channel channel = SessionUtil.getChannel(packet.getToUserId());
+        if (Objects.nonNull(channel) && SessionUtil.hasLogin(channel)) {
+
+        }
+
+                // .writeAndFlush(messageResponsePacket);
+        // ctx.channel().writeAndFlush(messageResponsePacket);
         // ByteBuf responseByteBuf = PacketCodeC.INSTANCE.encode(ctx.alloc().buffer(), messageResponsePacket);
     }
 }

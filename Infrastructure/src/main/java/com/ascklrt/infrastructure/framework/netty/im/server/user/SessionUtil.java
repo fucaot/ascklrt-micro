@@ -4,6 +4,7 @@ import com.ascklrt.infrastructure.framework.netty.im.server.Attributes;
 import io.netty.channel.Channel;
 
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class SessionUtil {
@@ -24,6 +25,14 @@ public class SessionUtil {
 
     public static boolean hasLogin(Channel channel) {
         return channel.attr(Attributes.LOGIN).get();
+    }
+
+    public static boolean hasLogin(String userId) {
+        Channel channel = getChannel(userId);
+        if (Objects.nonNull(channel)) {
+            return channel.attr(Attributes.LOGIN).get();
+        }
+        return false;
     }
 
     public static Session getSession(Channel channel) {
