@@ -25,10 +25,12 @@ public class MessageRequestHandler extends SimpleChannelInboundHandler<MessageRe
         messageResponsePacket.setFromUserName(session.getUserName());
         messageResponsePacket.setMessage("服务端回复：「" + packet.getMessage() + "」");
 
-
-        Channel channel = SessionUtil.getChannel(packet.getToUserId());
-        if (Objects.nonNull(channel) && SessionUtil.hasLogin(channel)) {
-
+        // 3. 发送消息给对应客户端
+        Channel toUserChannel = SessionUtil.getChannel(packet.getToUserId());
+        if (Objects.nonNull(toUserChannel) && SessionUtil.hasLogin(toUserChannel)) {
+            toUserChannel.writeAndFlush(messageResponsePacket);
+        } else {
+            System.out.println("[" + packet.getToUserId() +  "] 不在线，发送失败！");
         }
 
                 // .writeAndFlush(messageResponsePacket);

@@ -1,14 +1,11 @@
 package com.ascklrt.infrastructure.framework.netty.im.client;
 
-import com.ascklrt.infrastructure.framework.netty.im.client.handler.ClientHandler;
 import com.ascklrt.infrastructure.framework.netty.im.client.handler.LoginResponseHandler;
 import com.ascklrt.infrastructure.framework.netty.im.client.handler.MessageResponseHandler;
 import com.ascklrt.infrastructure.framework.netty.im.client.handler.Spliter;
 import com.ascklrt.infrastructure.framework.netty.im.protocol.command.request.LoginRequestPacket;
-import com.ascklrt.infrastructure.framework.netty.im.protocol.command.response.LoginResponsePacket;
-import com.ascklrt.infrastructure.framework.netty.im.protocol.command.response.MessageResponsePacket;
-import com.ascklrt.infrastructure.framework.netty.im.protocol.encode.PacketCodeC;
 import com.ascklrt.infrastructure.framework.netty.im.protocol.command.request.MessageRequestPacket;
+import com.ascklrt.infrastructure.framework.netty.im.protocol.encode.PacketCodeC;
 import com.ascklrt.infrastructure.framework.netty.im.protocol.encode.PacketDecoder;
 import com.ascklrt.infrastructure.framework.netty.im.protocol.encode.PacketEncode;
 import com.ascklrt.infrastructure.framework.netty.im.util.LoginUtil;
@@ -25,7 +22,7 @@ import java.util.Scanner;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
-public class ImClient {
+public class ImClientTwo {
 
     public static final int MAX_RETRY = 3;
 
@@ -96,7 +93,7 @@ public class ImClient {
                     String username = sc.nextLine();
 
                     LoginRequestPacket loginRequestPacket = new LoginRequestPacket();
-                    loginRequestPacket.setUserId("000001");
+                    loginRequestPacket.setUserId("000002");
                     loginRequestPacket.setUsername(username);
                     loginRequestPacket.setPassword("pwd");
 

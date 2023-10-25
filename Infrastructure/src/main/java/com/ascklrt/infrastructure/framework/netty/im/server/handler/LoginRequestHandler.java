@@ -29,11 +29,11 @@ public class LoginRequestHandler extends SimpleChannelInboundHandler<LoginReques
             // 标记为已登陆
             LoginUtil.markAsLogin(ctx.channel());
 
-            String userId = randomUserId();
-            loginResponsePacket.setUserId(userId);
+            // String userId = randomUserId();
+            loginResponsePacket.setUserId(packet.getUserId());
             loginResponsePacket.setSuccess(true);
 
-            SessionUtil.bindSession(new Session(userId, packet.getUsername()), ctx.channel());
+            SessionUtil.bindSession(new Session(packet.getUserId(), packet.getUsername()), ctx.channel());
         } else {
             System.out.println("IM-登陆失败！");
             loginResponsePacket.setReason("登陆失败");
