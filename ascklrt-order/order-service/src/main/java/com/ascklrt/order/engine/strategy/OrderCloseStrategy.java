@@ -1,13 +1,11 @@
 package com.ascklrt.order.engine.strategy;
 
-import com.fuint.common.util.CopyUtil;
-import com.fuint.common.zjqh.order.engine.OrderContext;
-import com.fuint.common.zjqh.order.engine.event.OrderCloseEvent;
-import com.fuint.common.zjqh.order.service.OrderWriteService;
-import com.fuint.framework.exception.BusinessCheckException;
-import com.fuint.framework.exception.BusinessException;
-import com.fuint.repository.model.zjqh.order.Order;
-import com.fuint.repository.model.zjqh.order.enums.OrderStatus;
+import com.ascklrt.common.util.CopyUtil;
+import com.ascklrt.order.engine.OrderContext;
+import com.ascklrt.order.engine.event.OrderCloseEvent;
+import com.ascklrt.order.enums.OrderStatus;
+import com.ascklrt.order.model.Order;
+import com.ascklrt.order.service.IOrderWriteService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Objects;
@@ -15,7 +13,7 @@ import java.util.Objects;
 public class OrderCloseStrategy implements OrderStrategy<OrderCloseEvent>{
 
     @Autowired
-    private OrderWriteService orderWriteService;
+    private IOrderWriteService orderWriteService;
 
     @Override
     public OrderStatus status() {
@@ -27,7 +25,7 @@ public class OrderCloseStrategy implements OrderStrategy<OrderCloseEvent>{
         // 已完成订单无法关单
         Order order = orderContext.getBaseOrder();
         if (!Objects.equals(order.getStatus(), OrderStatus.COMPLETE)) {
-            throw new BusinessCheckException(BusinessException.ORDER_STATUS_INCORRECT);
+            // throw new BusinessCheckException(BusinessException.ORDER_STATUS_INCORRECT);
         }
     }
 

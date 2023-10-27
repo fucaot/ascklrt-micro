@@ -1,5 +1,7 @@
 package com.ascklrt.order.service;
 
+import com.ascklrt.order.model.Order;
+
 /**
  * @author goumang
  * @description
@@ -8,4 +10,8 @@ package com.ascklrt.order.service;
 public interface IOrderReadService {
 
     String test();
+
+    Order load(String orderNum);
+
+    // List<Order> query(OrderQueryDTO query, OrderStatus... orderStatuses);
 }

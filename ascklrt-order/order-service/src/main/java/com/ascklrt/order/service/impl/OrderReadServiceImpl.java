@@ -1,5 +1,6 @@
 package com.ascklrt.order.service.impl;
 
+import com.ascklrt.order.model.Order;
 import com.ascklrt.order.service.IOrderReadService;
 import org.apache.dubbo.config.annotation.DubboService;
 
@@ -15,4 +16,10 @@ public class OrderReadServiceImpl implements IOrderReadService {
     public String test() {
         return "test123";
     }
+
+    @Override
+    public Order load(String orderNum) {
+        return null;
+    }
+
 }

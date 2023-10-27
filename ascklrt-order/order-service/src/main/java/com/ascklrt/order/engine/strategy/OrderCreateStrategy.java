@@ -1,15 +1,12 @@
 package com.ascklrt.order.engine.strategy;
 
 import cn.hutool.json.JSONUtil;
-import com.fuint.common.util.GenerateNum;
-import com.fuint.common.zjqh.order.engine.OrderContext;
-import com.fuint.common.zjqh.order.engine.event.OrderCreateEvent;
-import com.fuint.common.zjqh.order.service.OrderWriteService;
-import com.fuint.repository.model.zjqh.order.Order;
-import com.fuint.repository.model.zjqh.order.business.MembershipData;
-import com.fuint.repository.model.zjqh.order.enums.MemberPaidPlan;
-import com.fuint.repository.model.zjqh.order.enums.OrderStatus;
-import com.fuint.repository.model.zjqh.order.enums.OrderType;
+import com.ascklrt.common.util.GenerateNum;
+import com.ascklrt.order.engine.OrderContext;
+import com.ascklrt.order.engine.event.OrderCreateEvent;
+import com.ascklrt.order.enums.OrderStatus;
+import com.ascklrt.order.model.Order;
+import com.ascklrt.order.service.IOrderWriteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +14,7 @@ import org.springframework.stereotype.Service;
 public class OrderCreateStrategy implements OrderStrategy<OrderCreateEvent>{
 
     @Autowired
-    private OrderWriteService orderWriteService;
+    private IOrderWriteService orderWriteService;
 
     @Override
     public OrderStatus status() {
@@ -46,24 +43,10 @@ public class OrderCreateStrategy implements OrderStrategy<OrderCreateEvent>{
         order.setPayableAmount(event.getAmount());
         order.setPaidAmount(event.getAmount());
 
-        // 订单状态，目前只有会员服务
-        order.setType(event.getType());
-        // order.setBusinessData();
-
         // 3. 备注，用户信息
         order.setUserId(event.getUserId());
         order.setDescription(event.getDescription());
         order.setRemark(event.getRemark());
-
-        // 4. 设置业务数据
-        if (order.getType().equals(OrderType.MEMBERSHIP_SERVICE)) {
-            MembershipData membershipData = event.getMembershipData();
-            MemberPaidPlan memberPaidPlan = membershipData.getMemberPaidPlan();
-            order.setBusinessData(JSONUtil.toJsonStr(membershipData));
-            order.setAmount(memberPaidPlan.getPrice());
-            order.setPayableAmount(memberPaidPlan.getPrice());
-            order.setPaidAmount(memberPaidPlan.getPrice());
-        }
 
         orderContext.setOrder(order);
     }

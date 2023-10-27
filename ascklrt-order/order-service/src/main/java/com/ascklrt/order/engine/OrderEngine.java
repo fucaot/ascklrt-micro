@@ -1,12 +1,11 @@
 package com.ascklrt.order.engine;
 
-import com.fuint.common.zjqh.order.engine.event.OrderCreateEvent;
-import com.fuint.common.zjqh.order.engine.event.OrderEvent;
-import com.fuint.common.zjqh.order.engine.strategy.OrderStrategy;
-import com.fuint.common.zjqh.order.engine.strategy.OrderStrategyFactory;
-import com.fuint.common.zjqh.order.service.OrderReadService;
-import com.fuint.framework.exception.BusinessCheckException;
-import com.fuint.repository.model.zjqh.order.Order;
+import com.ascklrt.order.engine.event.OrderCreateEvent;
+import com.ascklrt.order.engine.event.OrderEvent;
+import com.ascklrt.order.engine.strategy.OrderStrategy;
+import com.ascklrt.order.engine.strategy.OrderStrategyFactory;
+import com.ascklrt.order.model.Order;
+import com.ascklrt.order.service.IOrderReadService;
 import com.google.common.util.concurrent.Striped;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,9 +27,9 @@ public class OrderEngine {
     OrderStrategyFactory strategyFactory;
 
     @Autowired
-    OrderReadService orderReadService;
+    IOrderReadService orderReadService;
 
-    public <T extends  OrderEvent> OrderContext<T> change(T event) {
+    public <T extends OrderEvent> OrderContext<T> change(T event) {
         Lock lock = LOCKS.get(event);
         lock.lock();
 
@@ -52,11 +51,11 @@ public class OrderEngine {
 
             return context;
         } catch (Exception e) {
-            if (e instanceof BusinessCheckException) {
-                logger.error("「订单流转遇到业务异常」: {}", e.getMessage());
-                throw e;
-            }
-            logger.error("「订单流转遇到服务异常」: ", e);
+            // if (e instanceof BusinessCheckException) {
+            //     logger.error("「订单流转遇到业务异常」: {}", e.getMessage());
+            //     throw e;
+            // }
+            // logger.error("「订单流转遇到服务异常」: ", e);
             throw e;
         } finally {
             lock.unlock();
@@ -102,7 +101,6 @@ public class OrderEngine {
                     .append("LOCK_ORDER_CREATE:")
                     .append(createEvent.getUserId())
                     .append(":")
-                    .append(createEvent.getType())
                     .append(createEvent.getAmount());
         }
         return "LOCK_ORDER_EVENT:" + event.getOrderNum();

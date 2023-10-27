@@ -1,7 +1,7 @@
 package com.ascklrt.order.engine;
 
-import com.fuint.common.zjqh.order.engine.event.OrderEvent;
-import com.fuint.repository.model.zjqh.order.Order;
+import com.ascklrt.order.engine.event.OrderEvent;
+import com.ascklrt.order.model.Order;
 import lombok.Data;
 
 @Data

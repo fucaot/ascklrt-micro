@@ -1,6 +1,7 @@
 package com.ascklrt.order.engine.event;
 
-import com.fuint.repository.model.zjqh.order.enums.OrderStatus;
+
+import com.ascklrt.order.enums.OrderStatus;
 
 public interface OrderEvent {
 

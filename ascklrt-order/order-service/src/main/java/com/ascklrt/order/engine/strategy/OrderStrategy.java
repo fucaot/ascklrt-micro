@@ -1,8 +1,8 @@
 package com.ascklrt.order.engine.strategy;
 
-import com.fuint.common.zjqh.order.engine.OrderContext;
-import com.fuint.common.zjqh.order.engine.event.OrderEvent;
-import com.fuint.repository.model.zjqh.order.enums.OrderStatus;
+import com.ascklrt.order.engine.OrderContext;
+import com.ascklrt.order.engine.event.OrderEvent;
+import com.ascklrt.order.enums.OrderStatus;
 
 public interface OrderStrategy<T extends OrderEvent> {
 

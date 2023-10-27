@@ -1,14 +1,12 @@
 package com.ascklrt.order.engine.strategy;
 
-import com.fuint.common.util.CopyUtil;
-import com.fuint.common.zjqh.order.engine.OrderContext;
-import com.fuint.common.zjqh.order.engine.event.OrderPayFinishEvent;
-import com.fuint.common.zjqh.order.engine.publish.event.OrderPayFinishPublishEvent;
-import com.fuint.common.zjqh.order.service.OrderWriteService;
-import com.fuint.framework.exception.BusinessCheckException;
-import com.fuint.framework.exception.BusinessException;
-import com.fuint.repository.model.zjqh.order.Order;
-import com.fuint.repository.model.zjqh.order.enums.OrderStatus;
+import com.ascklrt.common.util.CopyUtil;
+import com.ascklrt.order.engine.OrderContext;
+import com.ascklrt.order.engine.event.OrderPayFinishEvent;
+import com.ascklrt.order.engine.publish.event.OrderPayFinishPublishEvent;
+import com.ascklrt.order.enums.OrderStatus;
+import com.ascklrt.order.model.Order;
+import com.ascklrt.order.service.IOrderWriteService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +24,7 @@ public class OrderPayFinishStrategy implements OrderStrategy<OrderPayFinishEvent
     private ApplicationContext applicationContext;
 
     @Autowired
-    private OrderWriteService orderWriteService;
+    private IOrderWriteService orderWriteService;
 
     @Override
     public OrderStatus status() {
@@ -38,7 +36,7 @@ public class OrderPayFinishStrategy implements OrderStrategy<OrderPayFinishEvent
         // 1. 校验订单状态是否为待付款
         Order order = orderContext.getBaseOrder();
         if (!Objects.equals(order.getStatus(), OrderStatus.PAYING)) {
-            throw new BusinessCheckException(BusinessException.ORDER_STATUS_INCORRECT);
+            // throw new BusinessCheckException(BusinessException.ORDER_STATUS_INCORRECT);
         }
     }
 

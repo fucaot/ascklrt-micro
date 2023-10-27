@@ -1,6 +1,6 @@
 package com.ascklrt.order.engine.strategy;
 
-import com.fuint.repository.model.zjqh.order.enums.OrderStatus;
+import com.ascklrt.order.enums.OrderStatus;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
