@@ -29,6 +29,7 @@
         <maven.compiler.target>17</maven.compiler.target>
         <spring.cloud.alibaba.version>2022.0.0.0-RC1</spring.cloud.alibaba.version>
         <dubbo.version>3.2.0-beta.4</dubbo.version>
+        <elasticsearch.version>7.17.14</elasticsearch.version>
     </properties>
 
     <dependencyManagement>
@@ -40,6 +41,7 @@
                 <version>2022.0.0</version>
                 <type>pom</type>
             </dependency> -->
+            <!-- 模块 -->
             <dependency>
                 <groupId>com.ascklrt</groupId>
                 <artifactId>order-api</artifactId>
@@ -54,6 +56,13 @@
                 <groupId>com.ascklrt</groupId>
                 <artifactId>ascklrt-common</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+
+            <!-- elasticsearch -->
+            <dependency>
+                <groupId>org.elasticsearch.client</groupId>
+                <artifactId>elasticsearch-rest-high-level-client</artifactId>
+                <version>${elasticsearch.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
