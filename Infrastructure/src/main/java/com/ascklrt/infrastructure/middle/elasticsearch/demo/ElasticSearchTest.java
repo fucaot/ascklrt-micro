@@ -58,7 +58,7 @@ public class ElasticSearchTest {
     }
 
     @Test
-    void putDockment() throws IOException
+    void putDockment() throws IOException {
         IndexRequest put = new IndexRequest("hotel").id("1");
         put.source("{\"name\": \"Jack\", \"age\" : \"21\"}", XContentType.JSON);
         esClient.index(put, RequestOptions.DEFAULT);
