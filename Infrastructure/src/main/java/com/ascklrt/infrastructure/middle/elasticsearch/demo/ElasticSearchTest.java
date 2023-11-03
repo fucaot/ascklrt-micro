@@ -1,5 +1,6 @@
 package com.ascklrt.infrastructure.middle.elasticsearch.demo;
 
+import cn.hutool.json.JSONUtil;
 import org.apache.http.HttpHost;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
 import org.elasticsearch.action.index.IndexRequest;
@@ -61,6 +62,27 @@ public class ElasticSearchTest {
     void putDockment() throws IOException {
         IndexRequest put = new IndexRequest("hotel").id("1");
         put.source("{\"name\": \"Jack\", \"age\" : \"21\"}", XContentType.JSON);
+        esClient.index(put, RequestOptions.DEFAULT);
+    }
+
+    @Test
+    void insertHotelDoc() throws IOException {
+        Hotel hotel = new Hotel();
+        hotel.setId(3L);
+        hotel.setName("沈御绫");
+        hotel.setAddress("河北省致仪市窋沖区七钰路43号");
+        hotel.setPrice(100);
+        hotel.setScore(45);
+        hotel.setBrand("皇冠");
+        hotel.setCity("致仪市");
+        hotel.setStarName("3");
+        hotel.setBusiness("窋冲涯");
+        hotel.setLocation("39.1314,121.9483");
+        hotel.setPic("");
+
+        IndexRequest put = new IndexRequest("hotel").id("3");
+        // put.source("{\"name\": \"Jack\", \"age\" : \"21\"}", XContentType.JSON);
+        put.source(JSONUtil.toJsonStr(hotel), XContentType.JSON);
         esClient.index(put, RequestOptions.DEFAULT);
     }
 
