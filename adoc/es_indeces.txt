@@ -49,3 +49,51 @@ PUT /hotel
         }
     }
 }
+
+
+# 排序查询
+GET /indexName/_search
+{
+	"query": {
+		"match_all": {}
+	}，
+	"sort": [
+		 {"date": "desc"}
+	]
+}
+
+# 查询名字包含如家，价格不高于400，且在坐标31.21,121.5范围10km以内的
+GET /hotel/_search
+{
+	"query": {
+		"bool": {
+			"must": [
+				{
+					# 名字包含
+					"match": {
+						"name": "如家"
+					}
+				}
+			],
+			"must_not": [
+				{
+					# 范围查询，价格不高于400
+					"range": {
+						"price": {"gt": "400"}
+					}
+				}
+			],
+			"filter": [
+				{
+					"geo_distance": {
+						"distance": "10km",
+						 "location" : {
+							  "lat": "31.21",
+							  "lon": "121.5"
+						 }
+					}
+				}
+			]
+		}
+	}
+}
