@@ -1,6 +1,6 @@
 package com.ascklrt.infrastructure.juc.lock;
 
-import cn.hutool.core.thread.ThreadUtil;
+import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.CountDownLatch;
 
@@ -9,7 +9,7 @@ import java.util.concurrent.CountDownLatch;
  * @description
  * @date 2023/3/8 13:54
  */
-public class SyncLock {
+public class Sync {
 
     private static long n = 0;
 
@@ -28,7 +28,7 @@ public class SyncLock {
                      *
                      * synchronized 让不同线程之间的操作变成序列化的，必须上一个线程操作完下一个线程才能获取资源
                      */
-                    synchronized (SyncLock.class) {
+                    synchronized (Sync.class) {
                         // 临界区
                         n = n + 1 ;
                     }
@@ -44,5 +44,25 @@ public class SyncLock {
         latch.await();
 
         System.out.println(n);
+    }
+
+
+    static Integer num = 0;
+
+    @Test
+    public void another() throws InterruptedException {
+
+        for (int i = 0; i < 3; i++) {
+            Thread thread = new Thread(() -> {
+                synchronized (num) {
+                    while (num < 1000) {
+                        num = num + 1;
+                        System.out.println(Thread.currentThread().getName() + ": " + num);
+                    }
+                }
+            });
+            thread.start();
+        }
+        Thread.sleep(1000);
     }
 }
