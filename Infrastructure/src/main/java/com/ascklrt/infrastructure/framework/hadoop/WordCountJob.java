@@ -1,9 +1,14 @@
 package com.ascklrt.infrastructure.framework.hadoop;
 
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Reducer;
+import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
+import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -67,5 +72,30 @@ public class WordCountJob {
             LongWritable v3 = new LongWritable(sum);
             context.write(k3, v3);
         }
+    }
+
+    public static void main(String[] args) throws Exception {
+        Configuration config = new Configuration();
+        // 创建Job
+        Job job = Job.getInstance(config);
+        // 因为是节点计算，所以需要指定
+        job.setJarByClass(WordCountJob.class);
+
+        // 指定输入路径
+        FileInputFormat.setInputPaths(job, new Path("hdfs://localhost:8020"));
+        // 指定输出路径
+        FileOutputFormat.setOutputPath(job, new Path(""));
+
+        // 指定mapReduce计算资源
+        job.setMapperClass(WordMapper.class);
+        job.setMapOutputKeyClass(Text.class);
+        job.setMapOutputValueClass(LongWritable.class);
+
+        job.setReducerClass(WordReduce.class);
+        job.setOutputKeyClass(Text.class);
+        job.setOutputValueClass(LongWritable.class);
+
+        // 提交job
+        job.waitForCompletion(true)
     }
 }
