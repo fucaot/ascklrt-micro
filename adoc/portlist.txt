@@ -1,0 +1,4 @@
+es: 92XX
+
+hadoop: 93xx
+- hdfs: 9200
