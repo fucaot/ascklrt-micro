@@ -82,9 +82,9 @@ public class WordCountJob {
         job.setJarByClass(WordCountJob.class);
 
         // 指定输入路径
-        FileInputFormat.setInputPaths(job, new Path("hdfs://localhost:8020"));
+        FileInputFormat.setInputPaths(job, new Path("hdfs://localhost:8020/hello.txt"));
         // 指定输出路径
-        FileOutputFormat.setOutputPath(job, new Path(""));
+        FileOutputFormat.setOutputPath(job, new Path("hdfs://localhost:8020/out"));
 
         // 指定mapReduce计算资源
         job.setMapperClass(WordMapper.class);
@@ -96,6 +96,6 @@ public class WordCountJob {
         job.setOutputValueClass(LongWritable.class);
 
         // 提交job
-        job.waitForCompletion(true)
+        job.waitForCompletion(true);
     }
 }
