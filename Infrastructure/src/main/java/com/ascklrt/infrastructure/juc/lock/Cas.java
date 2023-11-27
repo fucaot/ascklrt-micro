@@ -9,7 +9,7 @@ public class Cas {
      */
     static AtomicInteger num = new AtomicInteger(0);
 
-    public static void main(String[] args) {
+    public static void maina(String[] args) {
         for (int i = 0; i < 3; i++) {
             new Thread(() -> {
                 while (num.get() < 1000) {

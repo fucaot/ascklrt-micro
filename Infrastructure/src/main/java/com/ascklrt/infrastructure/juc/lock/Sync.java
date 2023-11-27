@@ -13,7 +13,7 @@ public class Sync {
 
     private static long n = 0;
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void maina(String[] args) throws InterruptedException {
         int i = 0;
 
         Thread[] threads = new Thread[100];

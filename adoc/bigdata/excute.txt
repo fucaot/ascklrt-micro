@@ -1,0 +1,1 @@
+hadoop jar /runs/Infrastructure-1.0-SNAPSHOT.jar com.ascklrt.infrastructure.framework.hadoop.WordCountJob hdfs://hadoop100:9000/hello.txt hdfs://hadoop100:9000/out

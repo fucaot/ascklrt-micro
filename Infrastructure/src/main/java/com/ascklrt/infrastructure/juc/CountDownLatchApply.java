@@ -6,7 +6,7 @@ import java.util.concurrent.CountDownLatch;
 
 public class CountDownLatchApply {
 
-    public static void main(String[] args) {
+    public static void maina(String[] args) {
         List<Integer> ids = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
 
         CountDownLatch countDownLatch = new CountDownLatch(ids.size());

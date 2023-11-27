@@ -5,7 +5,7 @@ import io.netty.buffer.ByteBufAllocator;
 
 public class ByteBufTest {
 
-    public static void main(String[] args) {
+    public static void maina(String[] args) {
         // 使用默认分配器创建ByteBuf，初识容量为9，最大可扩展至容量为100
         ByteBuf buffer = ByteBufAllocator.DEFAULT.buffer(9, 100);
         print("create", buffer);

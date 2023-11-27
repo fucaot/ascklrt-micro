@@ -1,5 +1,6 @@
 package com.ascklrt.infrastructure.framework.hadoop;
 
+import cn.hutool.json.JSONUtil;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.LongWritable;
@@ -63,6 +64,7 @@ public class WordCountJob {
          */
         @Override
         protected void reduce(Text key, Iterable<LongWritable> values, Reducer<Text, LongWritable, Text, LongWritable>.Context context) throws IOException, InterruptedException {
+            System.out.println("k2: " + key + "v2: " + JSONUtil.toJsonStr(values));
             long sum = 0L;
             for (LongWritable value : values) {
                 sum = sum + value.get();

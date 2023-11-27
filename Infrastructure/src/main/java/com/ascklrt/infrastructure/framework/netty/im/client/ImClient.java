@@ -29,7 +29,7 @@ public class ImClient {
 
     public static final int MAX_RETRY = 3;
 
-    public static void main(String[] args) {
+    public static void maina(String[] args) {
         Bootstrap bootstrap = new Bootstrap();
         NioEventLoopGroup group = new NioEventLoopGroup();
 

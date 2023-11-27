@@ -13,7 +13,7 @@ public class NettyClient {
 
     public static final int MAX_RETRY = 3;
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void maina(String[] args) throws InterruptedException {
         Bootstrap bootstrap = new Bootstrap();
         NioEventLoopGroup group = new NioEventLoopGroup();
 

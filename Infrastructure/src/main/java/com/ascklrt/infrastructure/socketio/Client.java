@@ -7,7 +7,7 @@ import java.net.Socket;
 
 public class Client {
 
-    public static void main(String[] args) {
+    public static void maina(String[] args) {
         int port = 8080;
 
         Socket socket = null;
