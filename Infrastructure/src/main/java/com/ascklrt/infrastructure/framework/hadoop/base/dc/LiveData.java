@@ -1,4 +1,4 @@
-package com.ascklrt.infrastructure.framework.hadoop.dc;
+package com.ascklrt.infrastructure.framework.hadoop.base.dc;
 
 import lombok.Data;
 
@@ -19,17 +19,17 @@ public class LiveData {
 
     private Long hots;
 
-    private Integer nofallower;
+    private Long nofallower;
 
     private Long looktime;
 
     private Long smlook;
 
-    private Integer follower;
+    private Long follower;
 
-    private Integer gifter;
+    private Long gifter;
 
-    private Integer length;
+    private Long length;
 
     private String area;
 
