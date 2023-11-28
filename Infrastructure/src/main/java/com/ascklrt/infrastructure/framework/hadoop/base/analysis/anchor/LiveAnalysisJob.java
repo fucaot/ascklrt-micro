@@ -1,5 +1,6 @@
 package com.ascklrt.infrastructure.framework.hadoop.base.analysis.anchor;
 
+import com.ascklrt.infrastructure.framework.hadoop.base.analysis.LiveCleanWritable;
 import com.ascklrt.infrastructure.framework.hadoop.base.dc.LiveDataCleanJob;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;

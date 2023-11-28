@@ -1,4 +1,4 @@
-package com.ascklrt.infrastructure.framework.hadoop.base.analysis.anchor;
+package com.ascklrt.infrastructure.framework.hadoop.base.analysis;
 
 import lombok.Data;
 import org.apache.hadoop.io.Writable;
