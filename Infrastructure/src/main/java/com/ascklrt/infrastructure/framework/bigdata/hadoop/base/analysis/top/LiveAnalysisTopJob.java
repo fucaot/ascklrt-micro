@@ -1,6 +1,6 @@
-package com.ascklrt.infrastructure.framework.hadoop.base.analysis.top;
+package com.ascklrt.infrastructure.framework.bigdata.hadoop.base.analysis.top;
 
-import com.ascklrt.infrastructure.framework.hadoop.base.analysis.LiveCleanWritable;
+import com.ascklrt.infrastructure.framework.bigdata.hadoop.base.analysis.LiveCleanWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;

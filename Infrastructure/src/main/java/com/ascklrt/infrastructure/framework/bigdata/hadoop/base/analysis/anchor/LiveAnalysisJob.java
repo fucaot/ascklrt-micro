@@ -1,7 +1,7 @@
-package com.ascklrt.infrastructure.framework.hadoop.base.analysis.anchor;
+package com.ascklrt.infrastructure.framework.bigdata.hadoop.base.analysis.anchor;
 
-import com.ascklrt.infrastructure.framework.hadoop.base.analysis.LiveCleanWritable;
-import com.ascklrt.infrastructure.framework.hadoop.base.dc.LiveDataCleanJob;
+import com.ascklrt.infrastructure.framework.bigdata.hadoop.base.analysis.LiveCleanWritable;
+import com.ascklrt.infrastructure.framework.bigdata.hadoop.base.dc.LiveDataCleanJob;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.LongWritable;

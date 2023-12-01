@@ -13,9 +13,13 @@
         <module name="ascklrt-web" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Infrastructcure-his" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Infrastructcure-his" options="-parameters" />
       <module name="Infrastructure" options="-parameters" />
       <module name="ascklrt-common" options="-parameters" />
       <module name="ascklrt-order" options="" />

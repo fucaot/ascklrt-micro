@@ -30,6 +30,8 @@
         <spring.cloud.alibaba.version>2022.0.0.0-RC1</spring.cloud.alibaba.version>
         <dubbo.version>3.2.0-beta.4</dubbo.version>
         <elasticsearch.version>7.17.14</elasticsearch.version>
+        <commons-logging.version>1.2</commons-logging.version>
+        <spark.version>3.4.1</spark.version>
     </properties>
 
     <dependencyManagement>
@@ -71,6 +73,24 @@
                 <artifactId>hadoop-client</artifactId>
                 <version>3.2.0</version>
             </dependency>
+
+            <!-- Spark 不支持高版本jdk-->
+            <!--<dependency>
+                <groupId>org.apache.spark</groupId>
+                <artifactId>spark-core_2.12</artifactId>
+                <version>${spark.version}</version>
+            </dependency>-->
+            <!-- spark单独以来slf4j，这里选择logback -->
+           <!-- <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+                <version>1.6.6</version>
+            </dependency>
+            <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>1.2.12</version>
+            </dependency>-->
         </dependencies>
     </dependencyManagement>
 
@@ -102,7 +122,7 @@
             <artifactId>dubbo-rpc-triple</artifactId>
             <version>${dubbo.version}</version>
         </dependency>
-         <!-- Dubbo Nacos registry dependency -->
+        <!-- Dubbo Nacos registry dependency -->
         <dependency>
             <groupId>org.apache.dubbo</groupId>
             <artifactId>dubbo-registry-nacos</artifactId>

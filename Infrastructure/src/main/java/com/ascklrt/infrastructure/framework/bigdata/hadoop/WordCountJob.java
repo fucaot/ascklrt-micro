@@ -1,4 +1,4 @@
-package com.ascklrt.infrastructure.framework.hadoop;
+package com.ascklrt.infrastructure.framework.bigdata.hadoop;
 
 import cn.hutool.json.JSONUtil;
 import org.apache.hadoop.conf.Configuration;
@@ -12,8 +12,6 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 /**
  * 读取hdfs上的helo.txt，计算文件中每个单词出现的次数

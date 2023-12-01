@@ -1,4 +1,4 @@
-package com.ascklrt.infrastructure.framework.hadoop.base.dc;
+package com.ascklrt.infrastructure.framework.bigdata.hadoop.base.dc;
 
 import cn.hutool.json.JSONUtil;
 import org.apache.hadoop.conf.Configuration;
