@@ -17,7 +17,7 @@
 
 进入 `env/hadoop/hadoop-3.2.0/etc/hadoop` 目录，进行文件修改。
 
-core-site.xml
+#### core-site.xml
 
 ```
 <configuration>
@@ -34,7 +34,7 @@ core-site.xml
 ```
 
 
-hdfs-site.xml
+#### hdfs-site.xml
 ```
 <configuration>
     <property>
@@ -61,10 +61,16 @@ hdfs-site.xml
         <name>dfs.datanode.data.dir</name>
         <value>file:/Users/wangjiawei/Dev/env/hadoop/hadoop-3.2.0/dfs/data</value>
     </property>
+    
+    <!-- 设置最大堆内存为 2GB，看情况指定，后续使用hive可能存在namenode内存不足的情况 -->
+    <property>
+       <name>dfs.namenode.java.opts</name>
+       <value>-Xmx2048m</value>
+    </property>
 </configuration>
 ```
 
-mapred-site.xml
+#### mapred-site.xml
 ```
 <configuration>
     <!-- 指定mapreduce运行在yarn上 -->
@@ -97,7 +103,7 @@ mapred-site.xml
 </configuration>
 ```
 
-yarn-site.xml
+#### yarn-site.xml
 ```
 <configuration>
     <property>
@@ -129,6 +135,12 @@ yarn-site.xml
         <name>yarn.log.server.url</name>
         <value>http://localhost:19888/jobhistory/logs/</value>
     </property>
+    
+    <!-- 这一条配置的value，需要执行在bin目录下执行 hadoop classpath命令，然后将结果作为值 -->
+    <property>
+        <name>yarn.application.classpath</name>
+        <value>/Users/wangjiawei/Dev/env/hadoop/hadoop-3.2.0/etc/hadoop:/Users/wangjiawei/Dev/env/hadoop/hadoop-3.2.0/share/hadoop/common/lib/*:/Users/wangjiawei/Dev/env/hadoop/hadoop-3.2.0/share/hadoop/common/*:/Users/wangjiawei/Dev/env/hadoop/hadoop-3.2.0/share/hadoop/hdfs:/Users/wangjiawei/Dev/env/hadoop/hadoop-3.2.0/share/hadoop/hdfs/lib/*:/Users/wangjiawei/Dev/env/hadoop/hadoop-3.2.0/share/hadoop/hdfs/*:/Users/wangjiawei/Dev/env/hadoop/hadoop-3.2.0/share/hadoop/mapreduce/lib/*:/Users/wangjiawei/Dev/env/hadoop/hadoop-3.2.0/share/hadoop/mapreduce/*:/Users/wangjiawei/Dev/env/hadoop/hadoop-3.2.0/share/hadoop/yarn:/Users/wangjiawei/Dev/env/hadoop/hadoop-3.2.0/share/hadoop/yarn/lib/*:/Users/wangjiawei/Dev/env/hadoop/hadoop-3.2.0/share/hadoop/yarn/*</value>
+    </property>
 </configuration>
 ```
 
@@ -137,6 +149,9 @@ yarn-site.xml
 ```
 # export JAVA_HOME=/Users/wangjiawei/Library/Java/JavaVirtualMachines/openjdk-19.0.2/Contents/Home
 export JAVA_HOME=/Users/wangjiawei/Library/Java/JavaVirtualMachines/openjdk-1.8/Contents/Home
+
+# 设置堆内存大小为 2GB，根据实际情况指定，后续使用hive可能出现namenode节点内存不足的情况
+export HADOOP_HEAPSIZE=2048
 ```
 
 ---
