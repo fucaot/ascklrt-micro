@@ -6,6 +6,12 @@ https://archive.apache.org/dist/spark/
 
 下载对应hive版本的spark，在hive源码的pom文件中可以看spark版本。
 
+配置环境变量：
+```
+export SPARK_HOME=/Users/wangjiawei/Dev/env/spark/spark-2.3.0-bin-without-hadoop
+export PATH=$PATH:$SPARK_HOME/bin
+```
+
 ### 二、修改配置
 
 #### spark
@@ -26,7 +32,7 @@ export SPARK_DIST_CLASSPATH=$hadoop classpath
 
 hive将spark作为执行引擎，修改hive配置
 
-创建`hive-3.1.3/conf/spark-default.conf`：
+创建`hive-3.1.3/conf/spark-defaults.conf`：
 ```
 # 指定提交到 YARN 运行
 spark.master                   = yarn
@@ -52,7 +58,7 @@ hive-3.1.1/conf/hive-site.xml
 <!-- 指定spark作为执行引擎代替MapReduce，3.X开始hive开始淘汰MR-->
 <property>
     <name>spark.yarn.jars</name>
-    <value>hdfs://localhost:8020/spark-jars/</value>
+    <value>hdfs://localhost:8020/spark-jars/*</value>
 </property>
 <property>
     <name>hive.execution.engine</name>

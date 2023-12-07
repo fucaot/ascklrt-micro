@@ -6,14 +6,14 @@
 
 ---
 
-`hadoop-3.2.0/etc/hadoop/hdfs-site.xml` 添加配置：
+`hadoop-3.2.0/etc/hadoop/hdfs-site.xml` 添加配置，此处的wangjiawei是当前用户名：
 ```
 <!-- 允许代理任何主机 -->
 <property>
-    <name>hadoop.proxyuser.hadoop.hosts</name>
+    <name>hadoop.proxyuser.wangjiawei.hosts</name>
     <value>*</value></property>
 <property>
-    <name>hadoop.proxyuser.hadoop.groups</name>
+    <name>hadoop.proxyuser.wangjiawei.groups</name>
     <value>*</value>
 </property>
 ```
