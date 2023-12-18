@@ -12,7 +12,7 @@ public class CountDownLatchApply {
         CountDownLatch countDownLatch = new CountDownLatch(ids.size());
         for (Integer id: ids) {
             // 执行寻找工作
-            new Thread(new SearchTask(countDownLatch, id));
+            new Thread(new SearchTask(countDownLatch, id)).run();
         }
 
         try {
