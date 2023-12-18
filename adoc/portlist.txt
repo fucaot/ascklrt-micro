@@ -2,3 +2,8 @@ es: 92XX
 
 hadoop: 93xx
 - hdfs: 9200
+
+
+rocketmq:
+- nameserver: 9876
+- RocketMQ Console: 9877
