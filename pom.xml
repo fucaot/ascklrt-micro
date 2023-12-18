@@ -81,16 +81,17 @@
                 <version>${spark.version}</version>
             </dependency>-->
             <!-- spark单独以来slf4j，这里选择logback -->
-           <!-- <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-log4j12</artifactId>
-                <version>1.6.6</version>
-            </dependency>
-            <dependency>
-                <groupId>log4j</groupId>
-                <artifactId>log4j</artifactId>
-                <version>1.2.12</version>
-            </dependency>-->
+            <!-- <dependency>
+                 <groupId>org.slf4j</groupId>
+                 <artifactId>slf4j-log4j12</artifactId>
+                 <version>1.6.6</version>
+             </dependency>
+             <dependency>
+                 <groupId>log4j</groupId>
+                 <artifactId>log4j</artifactId>
+                 <version>1.2.12</version>
+             </dependency>-->
+
         </dependencies>
     </dependencyManagement>
 
@@ -187,6 +188,12 @@
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
             <version>${spring.cloud.alibaba.version}</version>
         </dependency> -->
+
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-client-java</artifactId>
+            <version>5.0.5</version>
+        </dependency>
     </dependencies>
 
 </project>
