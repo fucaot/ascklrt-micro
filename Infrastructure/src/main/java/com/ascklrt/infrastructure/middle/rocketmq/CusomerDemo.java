@@ -8,12 +8,13 @@ import org.apache.rocketmq.client.apis.consumer.FilterExpression;
 import org.apache.rocketmq.client.apis.consumer.FilterExpressionType;
 import org.apache.rocketmq.client.apis.consumer.PushConsumer;
 
+import java.nio.ByteBuffer;
 import java.util.Collections;
 
 public class CusomerDemo {
 
     public static void main(String[] args) throws Exception {
-        String endPoint = "localhost:8081";
+        String endPoint = "localhost:9878";
 
 
         ClientServiceProvider provider = ClientServiceProvider.loadService();
@@ -41,7 +42,19 @@ public class CusomerDemo {
                 .setSubscriptionExpressions(Collections.singletonMap(topic, filterExpression))
                 .setMessageListener(messageView -> {
                     System.out.println("messageview: " + JSONUtil.toJsonStr(messageView));
-                    return ConsumeResult.SUCCESS;
+                    System.out.println("messageId: " + messageView.getMessageId());
+
+
+                    // 取出buffer并进行反转，否则无法读取到正确的消息
+                    ByteBuffer messageBuffer = messageView.getBody();
+                    messageBuffer.flip();
+                    byte[] body = new byte[messageBuffer.remaining()];
+                    try {
+                        System.out.println("message: " + new String(body, "UTF-8"));
+                        return ConsumeResult.SUCCESS;
+                    } catch (Exception e) {
+                        return ConsumeResult.FAILURE;
+                    }
                 })
                 .build();
         Thread.sleep(Long.MAX_VALUE);

@@ -1,20 +1,18 @@
 package com.ascklrt.infrastructure.middle.rocketmq;
 
+
 import org.apache.rocketmq.client.apis.ClientConfiguration;
 import org.apache.rocketmq.client.apis.ClientConfigurationBuilder;
-import org.apache.rocketmq.client.apis.ClientException;
 import org.apache.rocketmq.client.apis.ClientServiceProvider;
 import org.apache.rocketmq.client.apis.message.Message;
-import org.apache.rocketmq.client.apis.message.MessageBuilder;
 import org.apache.rocketmq.client.apis.producer.Producer;
-import org.apache.rocketmq.client.apis.producer.SendReceipt;
 
 public class ProducerDemo {
 
     public static void main(String[] args) throws Exception {
 
         // 接入点地址
-        String endPoint = "localhost:8081";
+        String endPoint = "localhost:9878";
 
         String topic = "TEST_TOPIC";
 
